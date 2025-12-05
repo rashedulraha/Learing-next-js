@@ -1,17 +1,44 @@
+// components/Navbar.tsx
+
+"use client";
+
 import Link from "next/link";
-import React from "react";
-import Container from "../Responsive/Container";
+import { usePathname } from "next/navigation";
 
-const Navbar = () => {
+const navItems = [
+  { name: "Home", href: "/" },
+  { name: "About", href: "/about" },
+  { name: "Blog", href: "/blog" },
+  { name: "Contact", href: "/contact" },
+];
+
+export default function Navbar() {
+  const pathname = usePathname();
+
+  const isActive = (href: string) => {
+    if (href === "/") return pathname === "/";
+    return pathname.startsWith(href);
+  };
+
   return (
-    <Container>
-      <div className="flex items-center gap-6">
-        <Link href={"/home"}>Home</Link>
-        <Link href={"/about"}>about</Link>
-        <Link href={"/contact"}>contact</Link>
+    <nav className="bg-gray-900 p-6 shadow-lg">
+      <div className="max-w-6xl mx-auto">
+        <ul className="flex gap-10">
+          {navItems.map((item) => (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                className={`text-lg font-medium transition-all ${
+                  isActive(item.href)
+                    ? "text-cyan-400 font-bold border-b-2 border-cyan-400 pb-1"
+                    : "text-gray-300 hover:text-white"
+                }`}>
+                {item.name}
+              </Link>
+            </li>
+          ))}
+        </ul>
       </div>
-    </Container>
+    </nav>
   );
-};
-
-export default Navbar;
+}
