@@ -10,7 +10,7 @@ export const generateMetadata = async ({
   params,
 }: Props): Promise<Metadata> => {
   return {
-    title: `Login Page ${params.productsId}`,
+    title: `${(params.productsId = "Login")} Page`,
     description: `Please Login ${params.productsId}`,
   };
 };
