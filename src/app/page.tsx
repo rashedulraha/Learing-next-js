@@ -1,8 +1,10 @@
+import { SpotlightPreview } from "@/components/SpotlightPreview";
+
 export default function Home() {
   return (
     <div className="flex min-h-screen items-center justify-center bg-zinc-50 font-sans dark:bg-black">
       <main>
-        <h1 className="font-bold text-4xl">Learning next js </h1>
+        <SpotlightPreview />
       </main>
     </div>
   );
