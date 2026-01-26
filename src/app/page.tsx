@@ -1,6 +1,9 @@
 // import { SparklesPreview } from "@/components/SparklesPreview";
-import { BackgroundBoxesDemo } from "@/components/BackgroundBoxesDemo";
+// import { BackgroundBoxesDemo } from "@/components/BackgroundBoxesDemo";
+// import { DottedGlowBackgroundDemoSecond } from "@/components/DottedGlowBackgroundDemoSecond";
 // import { SpotlightPreview } from "@/components/SpotlightPreview";
+
+import { BackgroundBeamsDemo } from "@/components/BackgroundBeamsDemo";
 
 export default function Home() {
   return (
@@ -10,7 +13,10 @@ export default function Home() {
         {/*adding more ui using shadcn and aceternity */}
         {/* <SparklesPreview /> */}
         {/*  more bg  */}
-        <BackgroundBoxesDemo />
+        {/* <BackgroundBoxesDemo /> */}
+        {/* <DottedGlowBackgroundDemoSecond /> */}
+
+        <BackgroundBeamsDemo />
       </main>
     </div>
   );
