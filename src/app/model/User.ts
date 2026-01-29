@@ -15,3 +15,13 @@ const messageSchema: Schema<Message> = new Schema({
     default: Date.now,
   },
 });
+
+export interface User extends Document {
+  username: string;
+  email: string;
+  password: string;
+  verifyCode: string;
+  verifyExpiry: Date;
+  isAcceptingMessage: boolean;
+  message: Message[];
+}
