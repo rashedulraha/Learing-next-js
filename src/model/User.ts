@@ -28,30 +28,28 @@ export interface User extends Document {
 }
 
 const userSchema: Schema<User> = new Schema({
-  //? user name
   username: {
     type: String,
     required: [true, "User name is required"],
     trim: true,
     unique: true,
   },
-  // ?email
+
   email: {
     type: String,
     required: [true, "Email is required"],
     unique: true,
     match: [/^[^@]+@[^@]+\.[^@]+$/, "Please use a valid email address"],
   },
-  //? password
+
   password: { type: String, required: [true, "Password is required"] },
-  // ?verify code
+
   verifyCode: { type: String, required: [true, "Verify code is required"] },
-  // ?verify expiry
+
   verifyExpiry: {
     type: Date,
     required: [true, "Verify code expiry is required"],
   },
-  // ? is verify
 
   isVerified: {
     type: Boolean,
