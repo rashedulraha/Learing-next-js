@@ -1,6 +1,7 @@
 import dbConnect from "@/lib/dbConnection";
 import UserModel from "@/model/User";
 import bcrypt from "bcrypt";
+import VerificationEmail from "../../../../EmailVerification/VerificationEmail";
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -49,6 +50,9 @@ export async function POST(request: Request) {
 
       await newUser.save();
     }
+    //   send  verification code
+
+    const emailResponse = await VerificationEmail(email, username, verifyCode);
   } catch (signUpError) {
     console.log("Error registering user :", signUpError);
     return Response.json(
