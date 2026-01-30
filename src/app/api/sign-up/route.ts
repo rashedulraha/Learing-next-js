@@ -1,7 +1,7 @@
 import dbConnect from "@/lib/dbConnection";
 import UserModel from "@/model/User";
 import bcrypt from "bcrypt";
-import VerificationEmail from "../../../../EmailVerification/VerificationEmail";
+import { SendVerificationEmail } from "@/helpers/SendVerificationEmail";
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -18,7 +18,7 @@ export async function POST(request: Request) {
 
     if (existingUserVerifiedByUserName) {
       return Response.json(
-        { success: false, message: "User already taken" },
+        { success: false, message: "Username is  already taken" },
         { status: 400 },
       );
     }
@@ -28,7 +28,7 @@ export async function POST(request: Request) {
 
     // generate verifyCode
 
-    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+    const verifyCode = Math.floor(10000 + Math.random() * 90000).toString();
 
     if (existingUserByEmail) {
       // true  TODO back here
@@ -50,9 +50,17 @@ export async function POST(request: Request) {
 
       await newUser.save();
     }
-    //   send  verification code
 
-    const emailResponse = await VerificationEmail(email, username, verifyCode);
+    //!   send  verification code
+    const emailResponse = await SendVerificationEmail(
+      email,
+      username,
+      verifyCode,
+    );
+
+    if (!emailResponse.success) {
+      return Response.json({ message: "" }, { status: 500 });
+    }
   } catch (signUpError) {
     console.log("Error registering user :", signUpError);
     return Response.json(
