@@ -1,6 +1,6 @@
 import dbConnect from "@/lib/dbConnection";
 import UserModel from "@/model/User";
-import bcrypt from 'bcrypt';
+import bcrypt from "bcrypt";
 
 export async function POST(request: Request) {
   await dbConnect();
@@ -23,12 +23,31 @@ export async function POST(request: Request) {
     }
 
     //  existing user by email
-
     const existingUserByEmail = await UserModel.findOne({ email });
+
+    // generate verifyCode
+
+    const verifyCode = Math.floor(100000 + Math.random() * 900000).toString();
+
     if (existingUserByEmail) {
       // true  TODO back here
     } else {
-      const  hashPassWord = 
+      const hashPassWord = bcrypt.hash(password, 10);
+      const expiryDate = new Date();
+      expiryDate.setHours(expiryDate.getHours() + 1);
+
+      const newUser = new UserModel({
+        username,
+        email,
+        password: hashPassWord,
+        verifyCode,
+        verifyExpiry: expiryDate,
+        isVerified: false,
+        isAcceptingMessage: true,
+        messages: [],
+      });
+
+      await newUser.save();
     }
   } catch (signUpError) {
     console.log("Error registering user :", signUpError);
