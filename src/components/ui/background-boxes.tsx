@@ -1,7 +1,7 @@
 "use client";
 import React from "react";
 import { motion } from "motion/react";
-import { cn } from "@/lib/utils";
+import { cn } from "../../lib/utils";
 
 export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
   const rows = new Array(150).fill(1);
@@ -30,13 +30,11 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
         "absolute -top-1/4 left-1/4 z-0 flex h-full w-full -translate-x-1/2 -translate-y-1/2 p-4",
         className,
       )}
-      {...rest}
-    >
+      {...rest}>
       {rows.map((_, i) => (
         <motion.div
           key={`row` + i}
-          className="relative h-8 w-16 border-l border-slate-700"
-        >
+          className="relative h-8 w-16 border-l border-slate-700">
           {cols.map((_, j) => (
             <motion.div
               whileHover={{
@@ -47,8 +45,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                 transition: { duration: 2 },
               }}
               key={`col` + j}
-              className="relative h-8 w-16 border-t border-r border-slate-700"
-            >
+              className="relative h-8 w-16 border-t border-r border-slate-700">
               {j % 2 === 0 && i % 2 === 0 ? (
                 <svg
                   xmlns="http://www.w3.org/2000/svg"
@@ -56,8 +53,7 @@ export const BoxesCore = ({ className, ...rest }: { className?: string }) => {
                   viewBox="0 0 24 24"
                   strokeWidth="1.5"
                   stroke="currentColor"
-                  className="pointer-events-none absolute -top-[14px] -left-[22px] h-6 w-10 stroke-[1px] text-slate-700"
-                >
+                  className="pointer-events-none absolute -top-[14px] -left-[22px] h-6 w-10 stroke-[1px] text-slate-700">
                   <path
                     strokeLinecap="round"
                     strokeLinejoin="round"

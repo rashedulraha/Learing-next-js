@@ -1,4 +1,4 @@
-import dbConnect from "@/lib/dbConnection";
+import dbConnect from "../../../lib/dbConnection";
 import UserModel from "@/model/User";
 import bcrypt from "bcrypt";
 import { SendVerificationEmail } from "@/helpers/SendVerificationEmail";
